@@ -1,0 +1,33 @@
+.btn {
+  box-sizing: border-box;
+}
+
+.btn-80 {
+  min-width: 80px;
+}
+
+.alert {
+  margin: 10px 0;
+}
+
+.guideline {
+  position: absolute;
+  background: transparent;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  border-right: 1px solid #000000;
+  pointer-events: none;
+}
+
+.guideline > pre {
+  visibility: hidden;
+}
+
+.guideline > pre, .guideline span {
+  margin-right: 0;
+  padding-right: 0;
+}
+.test {
+
+}

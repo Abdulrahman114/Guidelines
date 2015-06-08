@@ -1,0 +1,23 @@
+<div class="modal">
+  <div class="modal-header">
+    <h1 class="dialog-title">Guidelines Preferences</h1>
+  </div>
+  <div class="modal-body">
+    <div class="field-container clearfix">
+      <label>Column Number:</label>
+      <input type="number" name="cols" id="columns-num" placeholder="80" min="1" max="1000" required>
+      <label>Line Color:</label>
+      <input type="text" name="color" placeholder="#B0B4B9" id="column-color" pattern="#[A-Fa-f0-9]{3}|#[A-Fa-f0-9]{6}" required>
+      <label>Enabled:</label>
+      <input type="checkbox" name="enabled" id="guidelines-enabled">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="dialog-button btn btn-80" data-button-id="cancel">
+      {{CANCEL}}
+    </a>
+    <a href="#" class="dialog-button primary btn btn-80" data-button-id="ok">
+      {{OK}}
+    </a>
+  </div>
+</div>
