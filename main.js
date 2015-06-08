@@ -181,13 +181,6 @@ define(function (require, exports, module) {
   //----------------------------------
 
   /**
-   * Updates guideline layout.
-   */
-  function layout() {
-
-  }
-
-  /**
    * Shows the preferences dialog and saves any changes.
    * @private
    */
