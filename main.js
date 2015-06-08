@@ -313,7 +313,7 @@ define(function (require, exports, module) {
    * @param event {Event} - the Event that triggered the handler
    */
   function eventHandler(event) {
-    console.log(event.type)
+
     switch (event.type) {
 
       case "activeEditorChange":
