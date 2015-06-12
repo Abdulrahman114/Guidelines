@@ -6,9 +6,9 @@ desired threshold for readability .
 
 ## Features
 
-* Works for multiple panes in any orientation.
-* Also draws the guideline for inline code editors.
-* The guideline fill the entire viewport, not just the visible code.
+* Works with multiple panes in any orientation.
+* Works with inline code editors.
+* The guideline fills the entire viewport, not just the visible code.
 * Displays properly if line numbers are hidden.
 * Accomodates custom gutter widths.
 * The guideline will not trigger scrolling in the viewport.
