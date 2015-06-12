@@ -1,20 +1,39 @@
 {
-  "name": "jakeknerr.guidelines",
+  "name": "yellowhangar.guidelines",
   "title": "Guidelines",
   "version": "1.0.1",
-  "engines": { "brackets": ">=1.3.0" },
   "description": "Displays column guidelines (print margins) at a specified column. Works for multiple panes.",
-  "keywords": ["Guidelines", "print-margins", "version-control", "source-control", "print", "margins"],
-  "homepage": "https://github.com/jakeknerr/Guidelines",
-  "bugs": "https://github.com/jakeknerr/Guidelines/issues",
-  "license": "MIT",
-  "author": {
-      "name": "Jake Knerr",
-      "email": "jake@ardisialabs.com",
-      "url": "https://github.com/jakeknerr"
+  "engines": {
+    "brackets": ">=1.3.0"
   },
-  "repository": {
-      "type": "git",
-      "url": "https://github.com/jakeknerr/Guidelines.git"
-  }
+  "homepage": "https://github.com/yellowhangar/Guidelines",
+  "author": "Yellow Hangar <jake@yellowhangar.com> (https://github.com/yellowhangar)",
+  "license": "MIT",
+  "keywords": [
+    "guidelines",
+    "print",
+    "margins",
+    "version-control",
+    "source-control",
+    "code",
+    "code-margins",
+    "column",
+    "columns",
+    "limiter",
+    "character",
+    "characters",
+    "print margin",
+    "page",
+    "pages",
+    "page margin",
+    "guide",
+    "column guide",
+    "length",
+    "linelength",
+    "line length",
+    "codestyle"
+  ],
+  "contributors": [
+    "Jake Knerr <jake@yellowhangar.com> (https://github.com/jakeknerr)"
+  ]
 }

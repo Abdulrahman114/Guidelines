@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// The MIT License (MIT)
-// Copyright (c) 2015 Jake Knerr <jake@ardisialabs.com>
+// The MIT License (Expat)
+// Copyright (c) 2015 Yellow Hangar
 //
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -11,9 +11,9 @@
  *
  * Will only work properly if code is displayed using a fixed-width font.
  *
- * @author Jake Knerr <jake@ardisialabs.com>
- * @copyright Jake Knerr
- * @license MIT
+ * @author Jake Knerr <jake@yellowhangar.com>
+ * @copyright Yellow Hangar
+ * @license MIT License (Expat)
  * @version 1.0.1
  */
 define(function (require, exports, module) {
@@ -56,7 +56,7 @@ define(function (require, exports, module) {
    * @const
    * @type {String}
    */
-  var GUIDELINES_ID = "jakeknerr.guidelines.open_preferences";
+  var GUIDELINES_ID = "yellowhangar.guidelines.open_preferences";
 
   /**
    * Default preferences for the extension.
@@ -87,13 +87,6 @@ define(function (require, exports, module) {
   var menu = Menus.getMenu(Menus.AppMenuBar.VIEW_MENU);
 
   /**
-   * Store the string used to set the width of the guideline.
-   * @private
-   * @type {String}
-   */
-  var guideLineChars;
-
-  /**
    * Store whether the extension has been disabled by the user.
    * @private
    * @type {Boolean}
@@ -106,6 +99,13 @@ define(function (require, exports, module) {
    * @type {String}
    */
   var guidelineColor;
+
+  /**
+   * Store the column to draw the line.
+   * @private
+   * @type {Number}
+   */
+  var columnNum;
 
   //---------------------------------------------------
   //
@@ -122,58 +122,51 @@ define(function (require, exports, module) {
    * @public
    */
   function createGuidelines() {
-    // defer will fix some timing issues with animations
-    setTimeout(function() {
 
-      // initially I thought I could add the guideline to each pane alone and
-      // not editor instances, however this doesn't work because then the
-      // guideline does not scroll; must add to each editor instance; one
-      // downside is that the guidelines is considered to be in the scroller
-      // calculation so if the viewport is smaller than the guideline, it will
-      // show scrollbars
+    // initially I thought I could add the guideline to each pane alone and
+    // not editor instances, however this doesn't work because then the
+    // guideline does not scroll; must add a guideline to each editor
+    // instance
 
-      if (!enabledExt) {
-        return;
+    if (!enabledExt) {
+      return;
+    }
+
+    // loop through each scroller; get the height of each scroller so that
+    // the guideline can be sized to at least fill the viewport
+    var scrollers = $("div.CodeMirror-scroll");
+    scrollers.each(function() {
+      var scroller = $(this);
+      var minHeight = scroller.height();
+
+      // add the guideline to the sizer; this will also add guidelines to
+      // inline editors
+      var jSizer = scroller.find("> div.CodeMirror-sizer");
+
+      // reuse guidelines if possible
+      var guideline = jSizer.find("> div.guideline");
+      if (!guideline || guideline.length < 1) {
+        // add the guideline; notice that you must include a <pre> tag
+        // because when line numbers are disabled, brackets introduces a
+        // style .show-line-padding that will indent <pre> tags based on
+        // the theme;
+        jSizer.append(
+          '<div class="guideline" tabindex="-1">' +
+            '<pre class></pre>' +
+          '</div>'
+        );
+        guideline = jSizer.find("> div.guideline");
       }
+      // apply the user selected line color and column
+      var preTag = guideline.find('> pre');
+      preTag.css('background-color', guidelineColor);
+      preTag.css('-webkit-mask-position', columnNum + 'ch 0');
 
-      // loop through each pane; get the height of each pane so that
-      // the guideline can be sized to at least fill the viewport
-      var panes = $("div.pane-content");
-      panes.each(function() {
-        var pane = $(this);
-        var minHeight = pane.height();
+      // set the minimum height to the scroller height
+      guideline.css("min-height", minHeight + "px");
 
-        // add the guideline to the sizer; this will also add guidelines to
-        // inline editors
-        var sizers = pane.find("div.CodeMirror-sizer");
-        sizers.each(function() {
-          var jSizer = $(this);
+    });
 
-          // reuse guidelines if possible
-          var guideline = jSizer.find("div.guideline");
-          if (!guideline || guideline.length < 1) {
-            // add the guideline; notice that you must wrap the code in <pre>
-            // because when line numbers are disabled, brackets introduces a
-            // style .show-line-padding that will indent <pre> tags based on
-            // the theme;
-            jSizer.append(
-            '<div class="guideline" tabindex="-1">' +
-              '<pre class>' +
-                '<span>' +
-                  guideLineChars +
-                '</span>' +
-              '</pre>' +
-            '</div>');
-            guideline = jSizer.find(" > .guideline");
-          }
-          guideline.css('border-right-color', guidelineColor);
-
-          // set the minimum height to the viewport height
-          guideline.css("min-height", minHeight + "px");
-
-        });
-      });
-    }, 0);
   }
 
   //----------------------------------
@@ -236,7 +229,7 @@ define(function (require, exports, module) {
               enabledInput[0].checked);
 
             // update settings
-            guideLineChars = getGuidelineString();
+            columnNum = PreferencesManager.get("guidelines.columns");
             enabledExt = PreferencesManager.get("guidelines.enabled");
             guidelineColor = PreferencesManager.get("guidelines.columnColor");
 
@@ -286,21 +279,6 @@ define(function (require, exports, module) {
     enabledInput[0].checked = PreferencesManager.get("guidelines.enabled");
   }
 
-  /**
-   * Returns the string used to set the width of the guideline.
-   * @private
-   * @returns {String}
-   */
-  function getGuidelineString() {
-    var columns = PreferencesManager.get("guidelines.columns");
-    columns = !columns || null ? 80 : columns < 1 ? 80 : columns;
-    var chars = "";
-    for (var i = 0; i < columns; i++) {
-      chars += "-";
-    }
-    return chars;
-  }
-
   //---------------------------------------------------
   //
   //  Event handlers
@@ -347,10 +325,8 @@ define(function (require, exports, module) {
   // load custom css
   ExtensionUtils.loadStyleSheet(module, "css/main.css");
 
-  // setup the string used to set the guideline width
-  guideLineChars = getGuidelineString();
-
   // get some settings now to prevent constant lookup
+  columnNum = PreferencesManager.get("guidelines.columns");
   enabledExt = PreferencesManager.get("guidelines.enabled");
   guidelineColor = PreferencesManager.get("guidelines.columnColor");
 

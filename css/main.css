@@ -11,20 +11,21 @@
 }
 
 .guideline {
+  width: 100%;
   position: absolute;
-  background: transparent;
   top: 0;
   bottom: 0;
   z-index: 2;
-  border-right: 1px solid #000000;
   pointer-events: none;
+  margin-right: 0;
+  padding-right: 0;
 }
 
 .guideline > pre {
-  visibility: hidden;
-}
-
-.guideline > pre, .guideline span {
-  margin-right: 0;
-  padding-right: 0;
+  height: 100%;
+  background-color: #B0B4B9;
+  -webkit-mask-origin: content;
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg class='test' xmlns='http://www.w3.org/2000/svg' width='1' height='1'><rect width='1' height='1'/></svg>");
+  -webkit-mask-position: 80ch 0;
+  -webkit-mask-repeat: repeat-y;
 }
