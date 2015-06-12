@@ -2,7 +2,7 @@
   "name": "yellowhangar.guidelines",
   "title": "Guidelines",
   "version": "1.0.1",
-  "description": "Displays column guidelines (print margins) at a specified column. Works for multiple panes.",
+  "description": "Displays column guidelines (print margins) at a specified column. Works with multiple panes, inline code editors, and supports custom colors.",
   "engines": {
     "brackets": ">=1.3.0"
   },

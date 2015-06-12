@@ -1,12 +1,13 @@
 # Guidelines
 
-![Print Margin](https://github.com/yellowhangar/Guidelines/blob/master/assets/guidelines-a.jpg)
-![Print Margin](https://github.com/yellowhangar/Guidelines/blob/master/assets/guidelines-b.jpg)
-*Print Margin on Column 80*
-
 Guidelines is a Brackets extension that displays column guidelines (print 
 margins) at a specified column. This is useful to keep code length below a 
-desired threshold for readability .
+desired threshold for readability.
+
+![Print Margin](https://github.com/yellowhangar/Guidelines/blob/master/assets/guidelines-a.jpg)
+![Print Margin](https://github.com/yellowhangar/Guidelines/blob/master/assets/guidelines-b.jpg)
+
+*Print margin on column 80 and the preferences dialog*
 
 ## Features
 
@@ -16,13 +17,14 @@ desired threshold for readability .
 * Displays properly if line numbers are hidden.
 * Accomodates custom gutter widths.
 * The guideline will not trigger scrolling in the viewport.
+* Will correct for zoomed font sizes.
 
 ## Preferences
 
-Users can set the column number to draw the guideline and the line color via the 
-menu at: View > Guidelines.
+Users can set the column number at which to draw the guideline and the guideline 
+color via the menu at: View > Guidelines.
 
-The extenion can also be disabled via the menu.
+The extension can also be disabled via the menu.
 
 ## License
 
