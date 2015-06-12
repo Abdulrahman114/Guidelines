@@ -1,5 +1,8 @@
 # Guidelines
 
+![Print Margin](https://github.com/yellowhangar/Guidelines/blob/master/assets/guidelines-a.jpg)
+*Print Margin on Column 80*
+
 Guidelines is a Brackets extension that displays column guidelines (print 
 margins) at a specified column. This is useful to keep code length below a 
 desired threshold for readability .
