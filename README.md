@@ -15,7 +15,7 @@ desired threshold for readability.
 * Works with inline code editors.
 * The guideline fills the entire viewport, not just the visible code.
 * Displays properly if line numbers are hidden.
-* Accomodates custom gutter widths.
+* Accommodates  custom gutter widths.
 * The guideline will not trigger scrolling in the viewport.
 * Will correct for zoomed font sizes.
 
